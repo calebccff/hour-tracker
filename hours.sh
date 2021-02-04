@@ -64,6 +64,10 @@ if [ "$JUST_SORT" = "true" ]; then
 	exit 1
 fi
 
+if [ -z $NUM_HOURS ]; then
+	die "Please specify the number of hours"
+fi
+
 # Add column headers to CSV if it doesn't exist
 if [ ! -f $FILE ] && [ "$NO_HEADERS" != "true" ]; then
 	echo "Date,Hours,Note" >> $FILE
