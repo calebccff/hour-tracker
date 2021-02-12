@@ -8,7 +8,7 @@
 
 THIS=$0
 FILE=$HOME/work/iob/hours.csv
-DATE=$(date +"%y:%m:%d")
+DATE=$(date +"%y.%m.%d")
 
 die() {
 	echo $1 1>&2
@@ -65,7 +65,8 @@ if [ "$JUST_SORT" = "true" ]; then
 fi
 
 if [ -z $NUM_HOURS ]; then
-	die "Please specify the number of hours"
+	cat $FILE | sed 's/,/ ,/g' | sed 's/"//g' | column -t -s, -W 3
+	exit 0
 fi
 
 # Add column headers to CSV if it doesn't exist
